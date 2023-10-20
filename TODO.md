@@ -1,9 +1,9 @@
 Tasks:
-- Create project on github
+- Create project on github [ok]
 - Add essential libs:
-    - React
-    - React Router
-    - MUI
+    - React [ok]
+    - React Route [ok]
+    - MUI [ok]
 - Create login 
 - Connect login to backend
 - Conectar o login com o backend

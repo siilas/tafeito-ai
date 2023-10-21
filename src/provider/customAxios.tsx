@@ -1,12 +1,12 @@
 import axios from "axios";
 
-import { base_api } from "../utils/api";
+import { baseApi } from "../utils/api";
 
 const hasToken = () => {
   return typeof localStorage.getItem("token") === "string";
 };
 const api = axios.create({
-  baseURL: base_api,
+  baseURL: baseApi,
   headers: {
     "Content-Type": "application/json",
   },

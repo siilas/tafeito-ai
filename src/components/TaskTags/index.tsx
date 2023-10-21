@@ -4,7 +4,7 @@ import { useState } from "react";
 import { api } from "../../provider/customAxios";
 
 import { TaskTagsProps } from "./TaskTags";
-import { url_add_task_tag } from "../../utils/api";
+import { urlAddTaskTag } from "../../utils/api";
 import { useGlobalContext } from "../../utils/global";
 
 const TaskTags = (props: TaskTagsProps) => {
@@ -31,11 +31,11 @@ const TaskTags = (props: TaskTagsProps) => {
 
   const addTaskTag = async (tag: string) => {
     const taskId = task?.id ?? -1;
-    const custom_task_tag_url = url_add_task_tag
+    const customTaskTagUrl = urlAddTaskTag
       .replace(":id", taskId.toString())
       .replace(":tag", tag);
     try {
-      await api.post(custom_task_tag_url);
+      await api.post(customTaskTagUrl);
       setRefectchTaskStatus(refetchtaskStatus + 1);
     } catch (err) {
       console.error("erro ao adicionar tag");
@@ -45,11 +45,11 @@ const TaskTags = (props: TaskTagsProps) => {
 
   const removeTaskTag = async (tag: string) => {
     const taskId = task?.id ?? -1;
-    const custom_task_tag_url = url_add_task_tag
+    const customTaskTagUrl = urlAddTaskTag
       .replace(":id", taskId.toString())
       .replace(":tag", tag);
     try {
-      await api.delete(custom_task_tag_url);
+      await api.delete(customTaskTagUrl);
       setRefectchTaskStatus(refetchtaskStatus + 1);
     } catch (err) {
       console.error("erro ao adicionar tag");
@@ -59,7 +59,6 @@ const TaskTags = (props: TaskTagsProps) => {
 
   const checkKeyPressed = (e: any) => {
     if (e.keyCode == 13) {
-      console.log("ENTER", e.target.value);
       addTaskTag(e.target.value);
     }
     if (e.keyCode == 27) {

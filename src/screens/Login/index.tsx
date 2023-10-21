@@ -1,9 +1,8 @@
-import * as React from "react";
 import { useState, useEffect } from "react";
+import { baseApi, urlLogin } from "../../utils/api";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
-// import CardHeader from '@mui/material/CardHeader';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
@@ -21,6 +20,7 @@ import { CustomizedCardHeader } from "./styles";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../provider/authProvider";
+
 const Login = () => {
   const { token, setToken } = useAuth();
 
@@ -65,7 +65,7 @@ const Login = () => {
       }),
     };
     setErrorMessage("");
-    fetch("http://localhost:3000/usuarios/login", requestOptions)
+    fetch(`${baseApi.concat(urlLogin)}`, requestOptions)
       .then(async (response) => {
         const dataResponse = await response.json();
         return {
@@ -74,8 +74,6 @@ const Login = () => {
         };
       })
       .then((data) => {
-        console.log("sucesso", JSON.stringify(data));
-        console.log(data);
         if (data.responseStatus === 422 && data.data?.mensagem) {
           setErrorMessage(data.data?.mensagem);
         } else if (data.responseStatus === 400) {

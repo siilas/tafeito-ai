@@ -5,7 +5,7 @@ import { CustomizedSectionBox } from "./styles";
 import { useEffect, useState } from "react";
 
 import { api } from "../../provider/customAxios";
-import { url_categorias } from "../../utils/api";
+import { urlCategorias } from "../../utils/api";
 import { Categoria } from "../../utils/model";
 import TaskList from "../TaskList";
 import { MainProps } from "./Main";
@@ -77,7 +77,7 @@ const MainWrapper = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await api.get(url_categorias);
+      const response = await api.get(urlCategorias);
       setCategorias(response.data);
     } catch (err) {
       if (err instanceof Error) {

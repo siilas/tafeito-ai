@@ -7,7 +7,7 @@ import { TaskListWrapperProps, TaskListProps } from "./TaskList";
 import TaskInput from "../TaskInput";
 import { Tarefa } from "../../utils/model";
 
-import { url_tasks } from "../../utils/api";
+import { urlTasks } from "../../utils/api";
 import { Box } from "@mui/material";
 
 import { usePreviousValue } from "../../utils/hooks";
@@ -17,36 +17,40 @@ const TaskList = (props: TaskListProps) => {
   const { tasks, categoria } = props;
 
   const [editTaskId, setEditTaskId] = useState<null | number>(null);
-  const { setIsEditingTask } = useGlobalContext();
+  const { setIsEditingTask, softDeletedTasks } = useGlobalContext();
 
   const renderTasks = () => {
-    return tasks.map((task) => {
-      return (
-        <Box key={task.id}>
-          {task.id === editTaskId ? (
-            <TaskInput
-              cancelTask={() => {
-                setEditTaskId(null);
-                setIsEditingTask(false);
-              }}
-              submitTask={() => {
-                setEditTaskId(null);
-                setIsEditingTask(false);
-              }}
-              category={categoria}
-              task={task}
-            />
-          ) : (
-            <Task
-              task={task}
-              onTaskChange={(taskId) => {
-                setEditTaskId(taskId);
-              }}
-            />
-          )}
-        </Box>
-      );
-    });
+    return tasks
+      .filter((task) => {
+        return softDeletedTasks.includes(task.id) === false;
+      })
+      .map((task) => {
+        return (
+          <Box key={task.id}>
+            {task.id === editTaskId ? (
+              <TaskInput
+                cancelTask={() => {
+                  setEditTaskId(null);
+                  setIsEditingTask(false);
+                }}
+                submitTask={() => {
+                  setEditTaskId(null);
+                  setIsEditingTask(false);
+                }}
+                category={categoria}
+                task={task}
+              />
+            ) : (
+              <Task
+                task={task}
+                onTaskChange={(taskId) => {
+                  setEditTaskId(taskId);
+                }}
+              />
+            )}
+          </Box>
+        );
+      });
   };
   return (
     <Box>
@@ -67,7 +71,7 @@ const TaskListWrapper = (props: TaskListWrapperProps) => {
   const fetchtasks = async () => {
     setLoading(true);
     try {
-      const response = await api.get(url_tasks);
+      const response = await api.get(urlTasks);
       const category_tasks = response.data
         .filter((task: Tarefa) => task.id_categoria === categoria.id)
         .sort((a: Tarefa, b: Tarefa) => {
@@ -87,7 +91,6 @@ const TaskListWrapper = (props: TaskListWrapperProps) => {
 
   useEffect(() => {
     if (loading === false && prevTaskStatus !== taskStatus) {
-      console.log(taskStatus);
       fetchtasks();
     }
   }, [taskStatus]);

@@ -8,17 +8,18 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import TaskActions from "../TaskActions";
+import { closeSnackbar } from 'notistack'
 
 import { useGlobalContext } from "../../utils/global";
 import DeleteTaskDialog from "../DeleteTaskDialog";
 import { TaskProps } from "./Task";
 import {
-  url_update_task,
-  url_finish_task,
-  url_reopen_task,
-  url_estimate_task,
+  urlUpdateTask,
+  urlFinishTask,
+  urlReopenTask,
+  urlEstimateTask,
 } from "../../utils/api";
-import { useSnackbar } from "notistack";
+import { useSnackbar, SnackbarKey } from "notistack";
 import { api } from "../../provider/customAxios";
 
 const Task = (props: TaskProps) => {
@@ -28,8 +29,10 @@ const Task = (props: TaskProps) => {
     setIsEditingTask,
     setRefectchTaskStatus,
     refetchtaskStatus,
-    isLoading,
     setIsLoading,
+    softDeletedTasks,
+    setSoftDeletedTasks,
+    softDeletedTasksRef
   } = useGlobalContext();
   const [_error, setError] = useState<null | string>(null);
 
@@ -42,7 +45,7 @@ const Task = (props: TaskProps) => {
   const finishTask = async () => {
     setIsLoading(true);
     const taskId = task?.id ?? -1;
-    const custom_task_url = url_finish_task.replace(":id", taskId.toString());
+    const custom_task_url = urlFinishTask.replace(":id", taskId.toString());
     try {
       await api.post(custom_task_url);
       setError(null);
@@ -61,7 +64,7 @@ const Task = (props: TaskProps) => {
   const reopenTask = async () => {
     setIsLoading(true);
     const taskId = task?.id ?? -1;
-    const custom_task_url = url_reopen_task.replace(":id", taskId.toString());
+    const custom_task_url = urlReopenTask.replace(":id", taskId.toString());
     try {
       await api.post(custom_task_url);
       setError(null);
@@ -90,15 +93,44 @@ const Task = (props: TaskProps) => {
     setChecked(newChecked);
   };
 
+  const action = (snackbarId:SnackbarKey) => (
+    <>
+      <button
+        onClick={() => {
+          const filteredValues = softDeletedTasks.filter(x => x !== task?.id);
+          setSoftDeletedTasks(filteredValues);
+          closeSnackbar(snackbarId); 
+        }}
+      >
+        Undo
+      </button>
+    </>
+  );
+
   const deleteTask = async () => {
     setIsLoading(true);
     const taskId = task?.id ?? -1;
-    const custom_task_url = url_update_task.replace(":id", taskId.toString());
+    const customTaskUrl = urlUpdateTask.replace(":id", taskId.toString());
 
     try {
-      await api.delete(custom_task_url);
+      const newSoftDeletedTasks = softDeletedTasks.concat(task?.id);
+      setSoftDeletedTasks(newSoftDeletedTasks);
       setError(null);
-      enqueueSnackbar("Tarefa deletada!", { variant: "success" });
+      enqueueSnackbar("Tarefa deletada!", {
+        variant: "success",
+        action: action,
+        onExited: async () => {
+
+          if (softDeletedTasksRef?.current?.includes(task?.id)) {
+            await api.delete(customTaskUrl);
+          }
+
+          //o id da task está na lista de tarefas deletadas?
+          //se sim, deletar task
+          //se não, não fazer nada
+          setRefectchTaskStatus(refetchtaskStatus + 1);
+        },
+      });
       setRefectchTaskStatus(refetchtaskStatus + 1);
       setIsLoading(false);
     } catch (err) {
@@ -110,7 +142,7 @@ const Task = (props: TaskProps) => {
 
   const estimateTask = async () => {
     const taskId = task?.id ?? -1;
-    const custom_task_url = url_estimate_task.replace(":id", taskId.toString());
+    const custom_task_url = urlEstimateTask.replace(":id", taskId.toString());
     setIsLoading(true);
     try {
       const res = await api.post(custom_task_url);
@@ -136,9 +168,7 @@ const Task = (props: TaskProps) => {
         secondaryAction={
           <TaskActions
             deleteTask={() => {
-              if (openedDialog === false) {
-                setOpenedDialog(true);
-              }
+              deleteTask()
             }}
             editTask={() => {
               onTaskChange(task.id);

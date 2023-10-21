@@ -15,7 +15,7 @@ import Logout from "@mui/icons-material/Logout";
 import { api } from "../../provider/customAxios";
 
 import { NavBarProps } from "./NavBar";
-import { url_usuarios_autenticado } from "../../utils/api";
+import { urlUsuariosAutenticado } from "../../utils/api";
 
 const NavBar = (props: NavBarProps) => {
   const { logout } = props;
@@ -27,7 +27,7 @@ const NavBar = (props: NavBarProps) => {
   }>(null);
 
   useEffect(() => {
-    api.get(url_usuarios_autenticado).then((response) => {
+    api.get(urlUsuariosAutenticado).then((response) => {
       setUserData(response.data.usuario);
     });
   }, []);

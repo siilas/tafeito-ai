@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { useSnackbar } from "notistack";
 
-import { url_project_task, url_tasks } from "../../utils/api";
+import { urlProjectTask, urlTasks } from "../../utils/api";
 import { api } from "../../provider/customAxios";
 
 import { ProjectTasksProps } from "./ProjectTasks";
@@ -62,7 +62,7 @@ const ProjectTasks = (props: ProjectTasksProps) => {
       descricao: taskDecription,
     };
 
-    await api.post(url_tasks, payload);
+    await api.post(urlTasks, payload);
   };
 
   const createProjectTasks = async () => {
@@ -78,7 +78,7 @@ const ProjectTasks = (props: ProjectTasksProps) => {
       `,
     };
     try {
-      const res = await api.post(url_project_task, payload);
+      const res = await api.post(urlProjectTask, payload);
       await Promise.all(
         res.data?.map((taskSuggestion: string) =>
           createTask(currentCategory.id, taskSuggestion)

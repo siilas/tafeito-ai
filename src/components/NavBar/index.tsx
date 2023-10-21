@@ -12,7 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import TaskAlt from "@mui/icons-material/TaskAlt";
 import Logout from "@mui/icons-material/Logout";
-import axios from "axios";
+import { api } from '../../provider/customAxios';
 
 import { NavBarProps } from "./NavBar";
 import { url_usuarios_autenticado } from '../../utils/api';
@@ -27,7 +27,7 @@ const NavBar = (props: NavBarProps) => {
   }>(null);
 
   useEffect(() => {
-    axios.get(url_usuarios_autenticado).then((response) => {
+    api.get(url_usuarios_autenticado).then((response) => {
       setUserData(response.data.usuario);
     });
   }, []);

@@ -1,31 +1,28 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import TaskInputWrapper from "../TaskInputWrapper";
 
 import { CustomizedSectionBox } from "./styles";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
+import { api } from "../../provider/customAxios";
 import { url_categorias } from "../../utils/api";
 import { Categoria, Tarefa } from "../../utils/model";
-import TaskList from '../TaskList';
+import TaskList from "../TaskList";
 import { MainProps } from "./Main";
-import { useGlobalContext } from '../../utils/global';
-
+import { useGlobalContext } from "../../utils/global";
+import ProjectTasks  from '../ProjectTasks';
 
 const Main = (props: MainProps) => {
   const { categorias } = props;
 
-  const {
-    isEditingTask,
-    selectedTaskInput,
-    refetchtaskStatus
-  } = useGlobalContext()
+  const { isEditingTask, selectedTaskInput, refetchtaskStatus } =
+    useGlobalContext();
 
-  
-  
   const renderCategoriaSection = (categoria_item: Categoria) => {
-    const showTaskInput = isEditingTask === false && (selectedTaskInput === null ||
-      selectedTaskInput === categoria_item.descricao);
+    const showTaskInput =
+      isEditingTask === false &&
+      (selectedTaskInput === null ||
+        selectedTaskInput === categoria_item.descricao);
     return (
       <CustomizedSectionBox key={categoria_item.id} pt={2} pb={1}>
         <Typography
@@ -39,13 +36,9 @@ const Main = (props: MainProps) => {
           {categoria_item.descricao}{" "}
         </Typography>
 
-        <TaskList categoria={categoria_item} taskStatus={refetchtaskStatus}/>
+        <TaskList categoria={categoria_item} taskStatus={refetchtaskStatus} />
 
-        {showTaskInput ? (
-          <TaskInputWrapper
-            category={categoria_item}
-          />
-        ) : null}
+        {showTaskInput ? <TaskInputWrapper category={categoria_item} /> : null}
       </CustomizedSectionBox>
     );
   };
@@ -70,6 +63,7 @@ const Main = (props: MainProps) => {
           {" "}
           Suas tarefas{" "}
         </Typography>
+        <ProjectTasks categories={categorias} />
       </CustomizedSectionBox>
       {categorias.map((categoria) => renderCategoriaSection(categoria))}
     </Box>
@@ -83,7 +77,7 @@ const MainWrapper = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(url_categorias);
+      const response = await api.get(url_categorias);
       setCategorias(response.data);
     } catch (err) {
       if (err instanceof Error) {

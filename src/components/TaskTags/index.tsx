@@ -1,11 +1,11 @@
-import { Box, Chip, IconButton, Tooltip, Input } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { Box, Chip, IconButton, Input, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { api } from "../../provider/customAxios";
 
-import { TaskTagsProps } from "./TaskTags";
 import { urlAddTaskTag } from "../../utils/api";
 import { useGlobalContext } from "../../utils/global";
+import { TaskTagsProps } from "./TaskTags";
 
 const TaskTags = (props: TaskTagsProps) => {
   const { task } = props;

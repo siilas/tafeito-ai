@@ -1,14 +1,14 @@
-import { Box, CardActions, CardContent, Card } from "@mui/material";
+import { Box, Card, CardActions, CardContent } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
 import { useSnackbar } from "notistack";
+import { useState } from "react";
 
 import Button from "@mui/material/Button";
 import { api } from "../../provider/customAxios";
 
 import { urlTasks, urlUpdateTask } from "../../utils/api";
-import { TaskInputProps } from "./TaskInput";
 import { useGlobalContext } from "../../utils/global";
+import { TaskInputProps } from "./TaskInput";
 
 const TaskInput = (props: TaskInputProps) => {
   const { category, task, cancelTask, submitTask } = props;

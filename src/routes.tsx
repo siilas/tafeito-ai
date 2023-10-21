@@ -1,19 +1,16 @@
-import * as React from "react";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
 } from "react-router-dom";
-import Login from './screens/Login';
-import Tasks from './screens/Tasks';
-import ProtectRoute from './provider/protectedRoute';
+import ProtectRoute from "./provider/protectedRoute";
+import Login from "./screens/Login";
+import Tasks from "./screens/Tasks";
 
 const Routes = () => {
 
   const authenticatedRoutes = [
     {
-      path: '/',
+      path: "/",
       element: <ProtectRoute />,
       children: [
         {
@@ -26,7 +23,7 @@ const Routes = () => {
 
   const unAuthenticatedRoutes = [
     {
-      path: '/login',
+      path: "/login",
       element: <Login />
     },
   ]

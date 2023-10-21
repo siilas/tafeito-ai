@@ -1,27 +1,27 @@
-import { useState, useEffect } from "react";
 import {
   Box,
   Button,
-  TextField,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
   Radio,
   RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
+  TextField,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
 
-import { urlProjectTask, urlTasks } from "../../utils/api";
 import { api } from "../../provider/customAxios";
+import { urlProjectTask, urlTasks } from "../../utils/api";
 
-import { ProjectTasksProps } from "./ProjectTasks";
 import { useGlobalContext } from "../../utils/global";
 import { Categoria } from "../../utils/model";
+import { ProjectTasksProps } from "./ProjectTasks";
 
 const ProjectTasks = (props: ProjectTasksProps) => {
   const { categories } = props;

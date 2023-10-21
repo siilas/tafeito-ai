@@ -1,26 +1,26 @@
-import { useState } from "react";
 import { format, parseISO } from "date-fns";
+import { useState } from "react";
 
-import TaskTags from "../TaskTags";
+import Checkbox from "@mui/material/Checkbox";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
+import { closeSnackbar } from "notistack";
 import TaskActions from "../TaskActions";
-import { closeSnackbar } from 'notistack'
+import TaskTags from "../TaskTags";
 
+import { SnackbarKey, useSnackbar } from "notistack";
+import { api } from "../../provider/customAxios";
+import {
+  urlEstimateTask,
+  urlFinishTask,
+  urlReopenTask,
+  urlUpdateTask,
+} from "../../utils/api";
 import { useGlobalContext } from "../../utils/global";
 import DeleteTaskDialog from "../DeleteTaskDialog";
 import { TaskProps } from "./Task";
-import {
-  urlUpdateTask,
-  urlFinishTask,
-  urlReopenTask,
-  urlEstimateTask,
-} from "../../utils/api";
-import { useSnackbar, SnackbarKey } from "notistack";
-import { api } from "../../provider/customAxios";
 
 const Task = (props: TaskProps) => {
   const { task, onTaskChange } = props;
@@ -125,9 +125,6 @@ const Task = (props: TaskProps) => {
             await api.delete(customTaskUrl);
           }
 
-          //o id da task está na lista de tarefas deletadas?
-          //se sim, deletar task
-          //se não, não fazer nada
           setRefectchTaskStatus(refetchtaskStatus + 1);
         },
       });

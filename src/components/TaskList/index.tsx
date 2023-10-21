@@ -1,17 +1,17 @@
-import { api } from "../../provider/customAxios";
 import { useEffect, useState } from "react";
+import { api } from "../../provider/customAxios";
 
 import List from "@mui/material/List";
-import Task from "../Task";
-import { TaskListWrapperProps, TaskListProps } from "./TaskList";
-import TaskInput from "../TaskInput";
 import { Tarefa } from "../../utils/model";
+import Task from "../Task";
+import TaskInput from "../TaskInput";
+import { TaskListProps, TaskListWrapperProps } from "./TaskList";
 
-import { urlTasks } from "../../utils/api";
 import { Box } from "@mui/material";
+import { urlTasks } from "../../utils/api";
 
-import { usePreviousValue } from "../../utils/hooks";
 import { useGlobalContext } from "../../utils/global";
+import { usePreviousValue } from "../../utils/hooks";
 
 const TaskList = (props: TaskListProps) => {
   const { tasks, categoria } = props;

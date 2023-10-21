@@ -1,21 +1,21 @@
+import Logout from "@mui/icons-material/Logout";
+import TaskAlt from "@mui/icons-material/TaskAlt";
+import AppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import TaskAlt from "@mui/icons-material/TaskAlt";
-import Logout from "@mui/icons-material/Logout";
 import { api } from "../../provider/customAxios";
 
-import { NavBarProps } from "./NavBar";
 import { urlUsuariosAutenticado } from "../../utils/api";
+import { NavBarProps } from "./NavBar";
 
 const NavBar = (props: NavBarProps) => {
   const { logout } = props;

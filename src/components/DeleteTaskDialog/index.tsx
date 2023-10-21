@@ -1,14 +1,14 @@
+import CloseIcon from "@mui/icons-material/Close";
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
   Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Typography,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 
 import { DeleteTaskDialogProps } from "./DeleteTaskDialog";
 

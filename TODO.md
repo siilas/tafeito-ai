@@ -4,6 +4,6 @@ Tasks:
     - React [ok]
     - React Route [ok]
     - MUI [ok]
-- Create login 
-- Connect login to backend
-- Conectar o login com o backend
+- Create login [ok]
+- Connect login to backend [ok]
+- Conectar o login com o backend [ok]

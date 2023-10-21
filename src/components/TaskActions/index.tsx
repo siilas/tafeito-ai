@@ -1,12 +1,12 @@
-import { Box, Tooltip, IconButton } from "@mui/material";
 import {
   Delete as DeleteIcon,
-  HourglassBottom as HourglassBottomIcon,
   Edit as EditIcon,
+  HourglassBottom as HourglassBottomIcon,
 } from "@mui/icons-material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 
-import { TaskActionsProps } from "./TaskActions";
 import { useGlobalContext } from "../../utils/global";
+import { TaskActionsProps } from "./TaskActions";
 
 const TaskActions = (props: TaskActionsProps) => {
   const { deleteTask, editTask, estimateTask } = props;

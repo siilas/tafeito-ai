@@ -1,16 +1,16 @@
 import { Box, Typography } from "@mui/material";
 import TaskInputWrapper from "../TaskInputWrapper";
 
-import { CustomizedSectionBox } from "./styles";
 import { useEffect, useState } from "react";
+import { CustomizedSectionBox } from "./styles";
 
 import { api } from "../../provider/customAxios";
 import { urlCategorias } from "../../utils/api";
+import { useGlobalContext } from "../../utils/global";
 import { Categoria } from "../../utils/model";
+import ProjectTasks from "../ProjectTasks";
 import TaskList from "../TaskList";
 import { MainProps } from "./Main";
-import { useGlobalContext } from "../../utils/global";
-import ProjectTasks from "../ProjectTasks";
 
 const Main = (props: MainProps) => {
   const { categorias } = props;

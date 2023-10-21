@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
 
-import Button from "@mui/material/Button";
 import AddTaskIcon from "@mui/icons-material/AddTask";
+import Button from "@mui/material/Button";
 
-import { TaskInputPropsWrapper } from "./TaskInputWrapper";
 import { useGlobalContext } from "../../utils/global";
+import { TaskInputPropsWrapper } from "./TaskInputWrapper";
 
 import TaskInput from "../TaskInput";
 

@@ -1,12 +1,11 @@
-import { Categoria, Tarefa} from '../../utils/model';
-
+import { Categoria, Tarefa } from "../../utils/model";
 
 export type TaskListWrapperProps = {
-    categoria: Categoria;
-    taskStatus: number;
-}
+  categoria: Categoria;
+  taskStatus: number;
+};
 
 export type TaskListProps = {
-    tasks: Tarefa[]
-    categoria: Categoria;
-}
+  tasks: Tarefa[];
+  categoria: Categoria;
+};

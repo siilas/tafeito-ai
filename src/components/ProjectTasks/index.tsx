@@ -17,7 +17,7 @@ import {
 import { useSnackbar } from "notistack";
 
 import { url_project_task, url_tasks } from "../../utils/api";
-import { api } from '../../provider/customAxios';
+import { api } from "../../provider/customAxios";
 
 import { ProjectTasksProps } from "./ProjectTasks";
 import { useGlobalContext } from "../../utils/global";
@@ -30,7 +30,8 @@ const ProjectTasks = (props: ProjectTasksProps) => {
   const [projectText, setProjectText] = useState<string>("");
   const [isValidForm, setIsValidForm] = useState<boolean>(false);
 
-  const { isLoading, setIsLoading, setRefectchTaskStatus, refetchtaskStatus } = useGlobalContext();
+  const { isLoading, setIsLoading, setRefectchTaskStatus, refetchtaskStatus } =
+    useGlobalContext();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,7 +42,6 @@ const ProjectTasks = (props: ProjectTasksProps) => {
   };
 
   const { enqueueSnackbar } = useSnackbar();
-
 
   useEffect(() => {
     if (selectedCat !== null && projectText !== "") {
@@ -55,7 +55,7 @@ const ProjectTasks = (props: ProjectTasksProps) => {
     setSelectedCat(parseInt((event.target as HTMLInputElement).value));
   };
 
-  const createTask = async (catId:number, taskDecription:string) => {
+  const createTask = async (catId: number, taskDecription: string) => {
     const payload = {
       // your post data goes here
       id_categoria: catId,
@@ -66,8 +66,10 @@ const ProjectTasks = (props: ProjectTasksProps) => {
   };
 
   const createProjectTasks = async () => {
-    const currentCategory = categories.filter((cat) => cat.id === selectedCat).shift() as Categoria;
- 
+    const currentCategory = categories
+      .filter((cat) => cat.id === selectedCat)
+      .shift() as Categoria;
+
     setIsLoading(true);
     const payload = {
       // your post data goes here
@@ -78,15 +80,16 @@ const ProjectTasks = (props: ProjectTasksProps) => {
     try {
       const res = await api.post(url_project_task, payload);
       await Promise.all(
-        res.data?.map((taskSuggestion:string) => createTask(currentCategory.id, taskSuggestion))
-      )
+        res.data?.map((taskSuggestion: string) =>
+          createTask(currentCategory.id, taskSuggestion)
+        )
+      );
       setIsLoading(false);
       enqueueSnackbar("Tarefas criadas!", { variant: "success" });
       setRefectchTaskStatus(refetchtaskStatus + 1);
     } catch (err) {
       setIsLoading(false);
       enqueueSnackbar("Erro ao criar as tarefas.", { variant: "error" });
-
     }
     setSelectedCat(-1);
     setProjectText("");
@@ -145,7 +148,10 @@ const ProjectTasks = (props: ProjectTasksProps) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={createProjectTasks} disabled={isValidForm === false || isLoading === true}>
+          <Button
+            onClick={createProjectTasks}
+            disabled={isValidForm === false || isLoading === true}
+          >
             Enviar
           </Button>
         </DialogActions>

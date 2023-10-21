@@ -12,16 +12,23 @@ function App() {
   );
   const [refetchtaskStatus, setRefectchTaskStatus] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  
+
   return (
     <div className="App">
       <AuthProvider>
         <SnackbarProvider maxSnack={3}>
-          <MyGlobalContext.Provider value={{ 
-            isEditingTask, setIsEditingTask,
-            selectedTaskInput,setSelectedTaskInput,
-            refetchtaskStatus,setRefectchTaskStatus,
-            isLoading, setIsLoading }}>
+          <MyGlobalContext.Provider
+            value={{
+              isEditingTask,
+              setIsEditingTask,
+              selectedTaskInput,
+              setSelectedTaskInput,
+              refetchtaskStatus,
+              setRefectchTaskStatus,
+              isLoading,
+              setIsLoading,
+            }}
+          >
             <Routes />
           </MyGlobalContext.Provider>
         </SnackbarProvider>

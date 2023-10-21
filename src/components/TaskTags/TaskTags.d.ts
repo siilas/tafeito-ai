@@ -1,5 +1,5 @@
-import { Tarefa } from '../../utils/model';
+import { Tarefa } from "../../utils/model";
 
 export type TaskTagsProps = {
-    task: Tarefa;
-}
+  task: Tarefa;
+};

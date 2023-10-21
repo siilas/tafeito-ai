@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSnackbar } from "notistack";
 
 import Button from "@mui/material/Button";
-import { api } from '../../provider/customAxios';
+import { api } from "../../provider/customAxios";
 
 import { url_tasks, url_update_task } from "../../utils/api";
 import { TaskInputProps } from "./TaskInput";
@@ -18,7 +18,9 @@ const TaskInput = (props: TaskInputProps) => {
   const { refetchtaskStatus, setSelectedTaskInput, setRefectchTaskStatus } =
     useGlobalContext();
 
-  const [taskDescription, setTaskDescription] = useState<string>(task?.descricao ?? '');
+  const [taskDescription, setTaskDescription] = useState<string>(
+    task?.descricao ?? ""
+  );
   const [error, setError] = useState<null | string>(null);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -57,7 +59,7 @@ const TaskInput = (props: TaskInputProps) => {
       descricao: taskDescription,
     };
     const taskId = task?.id ?? -1;
-    const custom_task_url = url_update_task.replace(':id', taskId.toString());
+    const custom_task_url = url_update_task.replace(":id", taskId.toString());
     try {
       await api.patch(custom_task_url, payload);
       setError(null);
@@ -103,8 +105,12 @@ const TaskInput = (props: TaskInputProps) => {
           >
             Cancelar
           </Button>
-          <Button component="label" variant="contained" onClick={isEdit ? editTask: createTask}>
-            {isEdit ?  'Editar': 'Criar'}
+          <Button
+            component="label"
+            variant="contained"
+            onClick={isEdit ? editTask : createTask}
+          >
+            {isEdit ? "Editar" : "Criar"}
           </Button>
         </CardActions>
       </Card>

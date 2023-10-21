@@ -1,6 +1,5 @@
-import { Categoria } from '../../utils/model';
-
+import { Categoria } from "../../utils/model";
 
 export type ProjectTasksProps = {
-    categories: Categoria[]
-}
+  categories: Categoria[];
+};

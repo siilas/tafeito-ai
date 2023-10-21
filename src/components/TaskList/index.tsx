@@ -1,4 +1,4 @@
-import { api } from '../../provider/customAxios';
+import { api } from "../../provider/customAxios";
 import { useEffect, useState } from "react";
 
 import List from "@mui/material/List";
@@ -70,7 +70,7 @@ const TaskListWrapper = (props: TaskListWrapperProps) => {
       const response = await api.get(url_tasks);
       const category_tasks = response.data
         .filter((task: Tarefa) => task.id_categoria === categoria.id)
-        .sort((a:Tarefa, b:Tarefa) => {
+        .sort((a: Tarefa, b: Tarefa) => {
           return a.id - b.id;
         });
       setTasks(category_tasks);

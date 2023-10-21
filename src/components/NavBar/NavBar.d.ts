@@ -1,3 +1,3 @@
 export type NavBarProps = {
-    logout: () => void
-}
+  logout: () => void;
+};

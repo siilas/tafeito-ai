@@ -16,17 +16,32 @@ const TaskActions = (props: TaskActionsProps) => {
   return (
     <Box>
       <Tooltip title="Estimar Tarefa">
-        <IconButton disabled={isLoading} edge="end" aria-label="editar" onClick={estimateTask}>
+        <IconButton
+          disabled={isLoading}
+          edge="end"
+          aria-label="editar"
+          onClick={estimateTask}
+        >
           <HourglassBottomIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Editar Tarefa">
-        <IconButton disabled={isLoading} edge="end" aria-label="editar" onClick={editTask}>
+        <IconButton
+          disabled={isLoading}
+          edge="end"
+          aria-label="editar"
+          onClick={editTask}
+        >
           <EditIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Deletar Tarefa">
-        <IconButton disabled={isLoading} edge="end" aria-label="deletar" onClick={deleteTask}>
+        <IconButton
+          disabled={isLoading}
+          edge="end"
+          aria-label="deletar"
+          onClick={deleteTask}
+        >
           <DeleteIcon />
         </IconButton>
       </Tooltip>

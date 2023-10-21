@@ -1,5 +1,5 @@
-import { Categoria, Tarefa } from '../../utils/model';
+import { Categoria, Tarefa } from "../../utils/model";
 
 export type TaskInputPropsWrapper = {
-    category: Categoria;
-}
+  category: Categoria;
+};

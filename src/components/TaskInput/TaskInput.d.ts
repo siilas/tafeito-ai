@@ -1,8 +1,8 @@
-import { Categoria, Tarefa } from '../../utils/model';
+import { Categoria, Tarefa } from "../../utils/model";
 
 export type TaskInputProps = {
-    category: Categoria;
-    task?: Tarefa;
-    cancelTask: () => void;
-    submitTask: () => void;
-}
+  category: Categoria;
+  task?: Tarefa;
+  cancelTask: () => void;
+  submitTask: () => void;
+};

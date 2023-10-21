@@ -12,10 +12,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import TaskAlt from "@mui/icons-material/TaskAlt";
 import Logout from "@mui/icons-material/Logout";
-import { api } from '../../provider/customAxios';
+import { api } from "../../provider/customAxios";
 
 import { NavBarProps } from "./NavBar";
-import { url_usuarios_autenticado } from '../../utils/api';
+import { url_usuarios_autenticado } from "../../utils/api";
 
 const NavBar = (props: NavBarProps) => {
   const { logout } = props;

@@ -1,29 +1,28 @@
-import axios from 'axios'
+import axios from "axios";
 
-import { base_api } from '../utils/api';
+import { base_api } from "../utils/api";
 
 const hasToken = () => {
- return typeof localStorage.getItem("token") === 'string';
-}
+  return typeof localStorage.getItem("token") === "string";
+};
 const api = axios.create({
   baseURL: base_api,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
-})
+});
 
 api.interceptors.request.use(
   (config) => {
     if (hasToken() === true) {
-      config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
+      config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
     }
 
-    return config
+    return config;
   },
   (error) => {
-    return Promise.reject(error)
-  },
+    return Promise.reject(error);
+  }
 );
-
 
 export { api };

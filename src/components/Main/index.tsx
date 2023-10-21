@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import TaskInputWrapper from "../TaskInputWrapper";
 
 import { CustomizedSectionBox } from "./styles";
@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 
 import { api } from "../../provider/customAxios";
 import { url_categorias } from "../../utils/api";
-import { Categoria, Tarefa } from "../../utils/model";
+import { Categoria } from "../../utils/model";
 import TaskList from "../TaskList";
 import { MainProps } from "./Main";
 import { useGlobalContext } from "../../utils/global";
-import ProjectTasks  from '../ProjectTasks';
+import ProjectTasks from "../ProjectTasks";
 
 const Main = (props: MainProps) => {
   const { categorias } = props;
